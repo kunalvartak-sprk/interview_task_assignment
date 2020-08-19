@@ -1,5 +1,6 @@
 # interview_task_assignment
  Job Scheduler documentation
+PROJECT COMPONENTS:
 
 1. Database Structure:
 	Total no of tables: 3
@@ -28,4 +29,33 @@
 			2. lastupdatereceived
 			3. address`
 	
-please refer view 
+please refer video : "Assignment_DataBase_walkthrough" for the details.
+
+
+2.  	RabbitMq : 
+					 Is used to store the job that are suppose to run today.
+					 All the jobs which are suppose to run today at a specific time are published on rabbitMQ.					  
+				     I am using delayed messaging queue , i.e jobs are already sorted in the queue based on the timings.
+					  
+please refer vide : "RabbitMq Walkthrough"		
+		
+		
+3.		Producer (GetJobs )	:
+		
+		Producer reads the database for the job configuraation and publish it to the RabbitMq ( dealyed rabbitmq)
+		by adding appropriate dealy to the messages.
+		message stored in the rabbitMQ is the json message which has all the information required by the producer to 
+		schedule the call.
+		process from the message form the MQ will be ablet  
+		
+4. 		Consumer: (ExecuteJobs)
+
+
+
+
+
+
+
+
+
+
