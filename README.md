@@ -71,12 +71,63 @@ please refer video : "Assignment_DataBase_walkthrough" for the details.
 2.  	RabbitMQ : 
 			- Is used to store the job that are suppose to run today.
 			- All the jobs which are suppose to run today at a specific time are published on rabbitMQ.					  
-			- I am using delayed messaging queue in RabbitMQ, 
+			- I am using delayed messaging queue in RabbitMQ plugin  
 			  i.e jobs are already sorted in the queue based on the timings and they will be available to 
 			  the consumer to consume only when there time is expired. 
-					  
-please refer video : "RabbitMq Walkthrough"	for additional details.
-		
+			
+			setup for rabbitMQ
+			1. download the zip file from https://www.rabbitmq.com/download.html
+			   1. for windows click on Install : Windows (manual )
+			   2. under the direct download  : download the zip file ( rabbitmq-server-windows-3.8.7.ziop)
+			   3. extract the zip and store it at C:\rabbitmq-server-windows-3.8.6
+			   4. then download the erlang from the following site: https://www.erlang.org/downloads 
+						"OTP 23.0 Windows 64-bit Binary File "
+			   5. install the erlang otp 
+			   6. set the enviroment variable and add path.
+			       1.  adding system variable:    ERLANG_HOME :  C:\Program Files\erl-23.0   :
+				   2.  edit path under system vairbale : %ERLANG_HOME%\bin
+				   
+			   7.  open the command promot and go to C:\rabbitmq-server-windows-3.8.6\sbin folder and enable the
+					rabbitmq management using following command
+					1. rabbitmq-plugins.bat enable rabbitmq-management
+					 now you can access the rabbitMQ management from browser by typing the following address
+					 http://localhost:15672
+					 default user id guest and password is guest.
+					 
+				8. now download rabbitMQ delay message queue plugin form the following site.
+					https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/tag/v3.8.0
+					download following file : rabbitmq_delayed_message_exchange-3.8.0.ez
+					after download is completed cut and paste it at 
+					C:\rabbitmq-server-windows-3.8.6\rabbitmq_server-3.8.6\plugins
+					
+				9. open the command promot and go to C:\rabbitmq-server-windows-3.8.6\sbin folder and enable the
+					rabbitmq delay plugin using following command
+					
+					1. rabbitmq-plugins enable rabbitmq_delayed_message_exchange 
+				
+				
+				10. open rabbitmq management using the following link
+					http://localhost:15672
+					1. create a queue name DelayQueue
+						a. got to queues tab 
+						b. click on add a new queue
+						c. select type as classic
+						d. delect durability as Durable and clcik add queue button.
+						
+					2. Create a exchange 
+						a. go to exchanges tab
+						b. click on add a new exchange
+						c. select type as x-delayed-message
+						d. arguments as :   x-delayed-type = direct
+						e. add exchange
+						
+					3. bind exchange to the queue
+						a. got to exchange tab
+						b. click on DelayEchane mentioned in Overview
+						c. click on bindings
+						d. under to queue type queue name : DelayQueue
+						e. click on bind
+							
 		
 3.	Producer (GetJobsjava )	:
 		
