@@ -4,6 +4,9 @@ PROJECT COMPONENTS:
 
 1. Database Structure:
 
+note: Job are schedule based on utc time zone if you are using job Cofiguation project to insert the jobs and schedule
+	  it will convert the local IST Time to UTC and then it will store the details in table based on utc time zone
+
 	Total no of tables: 3
 	1. jobs          				:use to store the meta data of the job like.
 			1. id					:idenity autoincremented column.
@@ -26,10 +29,11 @@ PROJECT COMPONENTS:
 										
 										
 	
-	2. schedules 					: use to store the job schedule detials
+	2. schedules 					: use to store the job schedule detials:
+
 			1. scheduleid			: autoincremented id when the new schedule is added.
 									: it is tied up with the job based on scheduleid column present in job tables
-			2. hours				: it indicates at what hour the job is suppose to get executed
+			2. hours				: it indicates at what hour the job is suppose to get executed 
 			3. minutes				: it indicates at what minute the job is suppose to get executed
 			4. jobrundayid			: 
 									 1. set it to -1 to run the job everyday
@@ -50,9 +54,9 @@ PROJECT COMPONENTS:
 	
 	3. destinations					: use to capture the heartbeat of the server/system on which our jobs are runnig.
 									  it stores the timestamp indicating host was alive at that time.
-			1. id
-			2. lastupdatereceived
-			3. address`
+			1. id					: autoincremented id
+			2. lastupdatereceived	: timestamp of the heartbeat
+			3. address`				: MAC address of the system
 	
 	Database Details:
 	Database is hosted in AWS AND it is mysql instance.
@@ -161,7 +165,8 @@ please refer video : "Assignment_DataBase_walkthrough" for the details.
 	2. delete job based on jobname
 	3. modify job based on jobname
 	4. View job based on jobname.
-
+     
+	 note: jobs and schedule time are converted from local IST Time to UTC time zone and then it will store the details in table.
 
 
 
