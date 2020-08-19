@@ -169,5 +169,8 @@ please refer video : "Assignment_DataBase_walkthrough" for the details.
 	 note: jobs and schedule time are converted from local IST Time to UTC time zone and then it will store the details in table.
 
 
+Assumpitons: 1. Job are stored in UTC Timezone in the database.
+			 2. jobs schedule at smae time are having same priority.
 
+enhancement: to add priority to the jobs scheduing on the rabbitMQ.			 
 
